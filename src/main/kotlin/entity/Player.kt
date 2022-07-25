@@ -1,10 +1,10 @@
 package entity
 
 import java.util.*
-open class Player (val name : String, val firstDeck: Deck){
+open class Player (val name : String){
 
-    val playerHand = Deck(playerHand)
+    val playerHand = Deck()
     val PlayerName = name
-    var called :Boolean = false
+    var called : Boolean = false
 
 }
