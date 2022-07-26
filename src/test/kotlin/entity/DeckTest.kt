@@ -18,13 +18,13 @@ class DeckTest (){
 
 
     /**
-     * Test if shuffle works
+     * Test if shuffle works correctly
      */
     @Test
     fun testShuffle() {
         val stack = Deck(random = Random(42))
         stack.shuffle()
-        assertEquals(listOf(c2,c3,c1), stack.drawThreeCards(3))
+        assertEquals(listOf(c2,c3,c1), stack.drawThreeCards())
         assertEquals(0, stack.cards.size)
     }
 }

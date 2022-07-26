@@ -1,11 +1,14 @@
 package entity
 
-import java.util.*
+/**
+ * creates a game of "Swim".
+ */
 
-open class SwimApp (){
-    open var drawPile = Deck()
-    open var tableDeck = Deck()
-    open var passes = 0
-    open var currentPlayer = Player(name = "player1")
-    open var calledPlayer = Player(name = "player2")
-}
+data class SwimApp (
+    var currentPlayer: Player,
+    var calledPlayer: Player? = null,
+    var passes: Int = 0,
+    val players: List<Player>,
+    val drawPile: Deck,
+    val tableDeck: Deck,
+        )

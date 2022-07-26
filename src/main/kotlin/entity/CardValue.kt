@@ -11,11 +11,6 @@ import java.util.*
  *
  */
 enum class CardValue {
-    TWO,
-    THREE,
-    FOUR,
-    FIVE,
-    SIX,
     SEVEN,
     EIGHT,
     NINE,
@@ -32,11 +27,6 @@ enum class CardValue {
      */
     override fun toString() =
         when(this) {
-            TWO -> "2"
-            THREE -> "3"
-            FOUR -> "4"
-            FIVE -> "5"
-            SIX -> "6"
             SEVEN -> "7"
             EIGHT -> "8"
             NINE -> "9"
@@ -59,18 +49,19 @@ enum class CardValue {
 
     }
 
-    fun valueOf(card: CardValue):Int {
-        val intValue: Int
-        val stringValue : String = card.toString()
-        if(stringValue == "A" ||  stringValue == "J" || stringValue == "Q" || stringValue == "K"){
-            intValue = 10
-        }
-        else {
-            intValue = stringValue.toInt()
-        }
-        return intValue
+    /**
+     * @return the value
+     */
+    fun valueOf() = when (this) {
+        SEVEN -> 7
+        EIGHT -> 8
+        NINE -> 9
+        TEN -> 10
+        JACK -> 10
+        QUEEN -> 10
+        KING -> 10
+        ACE -> 11
     }
-
 
 
 }
