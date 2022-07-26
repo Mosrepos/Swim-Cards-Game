@@ -8,14 +8,12 @@ import kotlin.random.Random
  * Holds cards in [cards]. A Deck is used to represent a card stack or a players hand in the swim game.
  */
 
-data class Deck(val random : Random = Random){
 
-    /**
-     * The actual backing data structure. As there is no dedicated stack implementation
-     * in Kotlin, a "double-ended queue" (Deque) is used.
-     */
-     val cards: ArrayDeque<Card> = ArrayDeque(3)
-
+/**
+ * The actual backing data structure. As there is no dedicated stack implementation
+ * in Kotlin, a "double-ended queue" (Deque) is used.
+ */
+data class Deck(val cards: ArrayDeque<Card> = ArrayDeque(3)){
 
     /**
      * Shuffles the cards in this stack

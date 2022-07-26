@@ -1,8 +1,5 @@
 package entity
 
-import entity.CardSuit
-import entity.CardValue
-import entity.Card
 import kotlin.test.*
 
 /**
