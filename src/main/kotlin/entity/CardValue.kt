@@ -59,6 +59,17 @@ enum class CardValue {
 
     }
 
+    fun valueOf(card: CardValue):Int {
+        val intValue: Int
+        val stringValue : String = card.toString()
+        if(stringValue == "A" ||  stringValue == "J" || stringValue == "Q" || stringValue == "K"){
+            intValue = 10
+        }
+        else {
+            intValue = stringValue.toInt()
+        }
+        return intValue
+    }
 
 
 
