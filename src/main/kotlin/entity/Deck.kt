@@ -10,7 +10,7 @@ open class Deck(private val random : Random = Random){
      * The actual backing data structure. As there is no dedicated stack implementation
      * in Kotlin, a "double-ended queue" (Deque) is used.
      */
-    private val cards: ArrayDeque<Card> = ArrayDeque(32)
+     val cards: ArrayDeque<Card> = ArrayDeque(32)
 
 
     /**
