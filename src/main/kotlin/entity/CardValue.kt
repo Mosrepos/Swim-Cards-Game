@@ -3,11 +3,11 @@ package entity
 import java.util.*
 
 /**
- * Enum to distinguish between the 13 possible values in a french-suited card game:
- * 2-10, Jack, Queen, King, and Ace.
+ * Enum to distinguish between the 8 possible values in a french-suited card game:
+ * 7-10, Jack, Queen, King, and Ace.
  *
  * The values are ordered according to their most common ordering:
- * 2 < 3 < ... < 10 < Jack < Queen < King < Ace
+ * 7 < ... < 10 < Jack < Queen < King < Ace
  *
  */
 enum class CardValue {
@@ -23,7 +23,7 @@ enum class CardValue {
 
     /**
      * provide a single character to represent this value.
-     * Returns one of: 2/3/4/5/6/7/8/9/10/J/Q/K/A
+     * Returns one of: 7/8/9/10/J/Q/K/A
      */
     override fun toString() =
         when(this) {

@@ -14,7 +14,7 @@ class CardTest {
     private val otherQueenOfHearts = Card(CardSuit.HEARTS, CardValue.QUEEN)
     private val jackOfDiamonds = Card(CardSuit.DIAMONDS, CardValue.JACK)
 
-    // unicode characters for the suits, as those should be used by [WarCard.toString]
+    // unicode characters for the suits, as those should be used by [Card.toString]
     private val heartsChar = '\u2665' // ♥
     private val diamondsChar = '\u2666' // ♦
     private val spadesChar = '\u2660' // ♠
@@ -60,4 +60,15 @@ class CardTest {
         assertNotSame(queenOfHearts, otherQueenOfHearts)
     }
 
+    /**
+     * Test function valueOf()
+     */
+    @Test
+    fun testValueOf(){
+        assert(aceOfSpades.value.valueOf()==11)
+        assert(jackOfClubs.value.valueOf()==10)
+        assert(jackOfDiamonds.value.valueOf()==10)
+        assert(queenOfHearts.value.valueOf()==10)
+
+    }
 }
