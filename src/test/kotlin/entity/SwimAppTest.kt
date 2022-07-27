@@ -2,6 +2,10 @@ package entity
 
 import kotlin.test.*
 
+/**
+ * test class to test the [SwimApp]
+ *
+ */
 class SwimAppTest{
 
     private val pile = Deck(
@@ -58,7 +62,9 @@ class SwimAppTest{
     val calledPlayer = currentPlayer
     var passes: Int = 0
 
-
+    /**
+     * a funtion to test the parameters of the [SwimApp]
+     */
     @Test
     fun testSwimApp(){
         assert(playersList[0]==p1)

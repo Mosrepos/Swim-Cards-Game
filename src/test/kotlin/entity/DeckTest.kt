@@ -10,8 +10,7 @@ import kotlin.test.*
  */
 class DeckTest {
 
-    // cards to use for testing
-    private val c1 = Card(CardSuit.DIAMONDS, CardValue.NINE)
+    // decks to use for testing
 
     private val d0 = Deck(
         ArrayDeque(

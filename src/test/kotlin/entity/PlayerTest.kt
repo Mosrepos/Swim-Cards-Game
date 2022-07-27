@@ -2,6 +2,10 @@ package entity
 
 import kotlin.test.*
 
+/**
+ * test class to test [Player]
+ *
+ */
 class PlayerTest {
     private val deck1 = Deck(
         ArrayDeque(
@@ -24,6 +28,10 @@ class PlayerTest {
     val player1 = Player("Mo",deck1)
     val player2 = Player("Luca",deck2)
 
+
+    /**
+     * funtion to test the parameters of a [Player]
+     */
     @Test
     fun testPlayer(){
         assert(player1.playerName == "Mo")
