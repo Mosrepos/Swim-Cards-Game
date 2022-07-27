@@ -61,7 +61,7 @@ class CardTest {
     }
 
     /**
-     * Test function valueOf()
+     * test if valueOf returns the right value of a card
      */
     @Test
     fun testValueOf(){

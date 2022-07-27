@@ -49,6 +49,7 @@ enum class CardValue {
 
     }
 
+
     /**
      * @return the value
      */
