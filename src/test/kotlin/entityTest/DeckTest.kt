@@ -1,8 +1,13 @@
-package entity
+package entityTest
 
+
+import entity.Card
+import entity.CardSuit
+import entity.CardValue
+import entity.Deck
 import org.junit.jupiter.api.Test
 import kotlin.random.Random
-import kotlin.test.*
+import kotlin.test.assertFailsWith
 
 
 /**

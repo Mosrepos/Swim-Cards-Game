@@ -1,6 +1,6 @@
 package entity
 
-import java.util.*
+//import java.util.*
 
 /**
  * Enum to distinguish between the 8 possible values in a french-suited card game:
@@ -37,7 +37,7 @@ enum class CardValue {
             ACE -> "A"
         }
 
-
+    /**
     companion object {
 
         /**
@@ -48,7 +48,7 @@ enum class CardValue {
         }
 
     }
-
+     */
 
     /**
      * @return the value of the card

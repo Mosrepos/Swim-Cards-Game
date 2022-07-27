@@ -1,6 +1,8 @@
-package entity
+package entityTest
 
-import kotlin.test.*
+
+import entity.*
+import kotlin.test.Test
 
 /**
  * test class to test Player

@@ -1,12 +1,14 @@
-package entity
+package entityTest
 
-import kotlin.test.*
+
+import entity.*
+import kotlin.test.Test
 
 /**
  * test class to test the [SwimApp]
  *
  */
-class SwimAppTest{
+class SwimAppTest {
 
     private val pile = Deck(
         ArrayDeque(
@@ -56,8 +58,8 @@ class SwimAppTest{
 
     val p1 = Player("Mo",d1)
     val p2 = Player("Hasan",d2)
-    val p3 = Player("Safi",d3)
-    val playersList = listOf<Player>(p1,p2,p3)
+    val p3 = Player("Safi", d3)
+    val playersList = listOf(p1, p2, p3)
     var currentPlayer = p1
     val calledPlayer = currentPlayer
     var passes: Int = 0
@@ -65,7 +67,7 @@ class SwimAppTest{
     val game1 = SwimApp(currentPlayer,calledPlayer,0,playersList,pile,table)
 
     /**
-     * a funtion to test the parameters of the [SwimApp]
+     * a function to test the parameters of the [SwimApp]
      */
     @Test
     fun testSwimApp(){

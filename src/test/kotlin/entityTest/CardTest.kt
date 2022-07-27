@@ -1,6 +1,12 @@
-package entity
+package entityTest
 
-import kotlin.test.*
+
+import entity.Card
+import entity.CardSuit
+import entity.CardValue
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNotSame
 
 /**
  * Test cases for [Card]
