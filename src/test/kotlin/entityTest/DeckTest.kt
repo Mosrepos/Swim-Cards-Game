@@ -5,8 +5,8 @@ import entity.Card
 import entity.CardSuit
 import entity.CardValue
 import entity.Deck
-import org.junit.jupiter.api.Test
 import kotlin.random.Random
+import kotlin.test.Test
 import kotlin.test.assertFailsWith
 
 
@@ -17,13 +17,6 @@ class DeckTest {
 
     // decks to use for testing
 
-    private val d0 = Deck(
-        ArrayDeque(
-            listOf(
-            )
-        )
-    )
-
     private val d1 = Deck(
         ArrayDeque(
             listOf(
@@ -33,14 +26,6 @@ class DeckTest {
         )
     )
 
-    private val d2 = Deck(
-        ArrayDeque(
-            listOf(
-                Card(CardSuit.DIAMONDS, CardValue.SEVEN),
-                Card(CardSuit.DIAMONDS, CardValue.EIGHT)
-            )
-        )
-    )
 
     private val d3 = Deck(
         ArrayDeque(
@@ -78,11 +63,9 @@ class DeckTest {
     @Test
     fun testDrawThreeCards(){
 
-        assertFailsWith<IllegalArgumentException> { d0.drawThreeCards() }
         assertFailsWith<IllegalArgumentException> { d1.drawThreeCards() }
-        assertFailsWith<IllegalArgumentException> { d2.drawThreeCards() }
 
-        val d3Copy2 = d3.copy()
+
         val drawnCards = d3.drawThreeCards()
         assert(drawnCards[0].value == CardValue.QUEEN)
         assert(drawnCards[0].suit == CardSuit.DIAMONDS)
@@ -92,12 +75,13 @@ class DeckTest {
         assert(drawnCards[2].suit == CardSuit.DIAMONDS)
 
     }
+
     /**
      * test if toString method works correctly
      */
     @Test
-    fun testToString1(){
-        //print(d2.cards.toString())
-        assert(1==1)
+    fun testToString() {
+        assert(d1.toString() == "[♦A, ♦J]")
+
     }
 }

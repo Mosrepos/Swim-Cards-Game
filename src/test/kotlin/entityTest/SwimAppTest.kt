@@ -71,26 +71,14 @@ class SwimAppTest {
      */
     @Test
     fun testSwimApp(){
-        assert(game1.currentPlayer==p1)
-
+        assert(game1.currentPlayer == p1)
+        assert(game1.calledPlayer == p1)
 
 
         assert(playersList[0]==p1)
         assert(playersList[1]==p2)
         assert(playersList[2]==p3)
 
-        assert(currentPlayer==p1)
-        assert(calledPlayer==p1)
-        assert(passes==0)
-
-        val pileCopy = pile.copy()
-        assert(pileCopy==pile)
-
-
-        val tableCopy = table.copy()
-        assert(tableCopy==table)
 
     }
-
-
 }
