@@ -62,11 +62,17 @@ class SwimAppTest{
     val calledPlayer = currentPlayer
     var passes: Int = 0
 
+    val game1 = SwimApp(currentPlayer,calledPlayer,0,playersList,pile,table)
+
     /**
      * a funtion to test the parameters of the [SwimApp]
      */
     @Test
     fun testSwimApp(){
+        assert(game1.currentPlayer==p1)
+
+
+
         assert(playersList[0]==p1)
         assert(playersList[1]==p2)
         assert(playersList[2]==p3)

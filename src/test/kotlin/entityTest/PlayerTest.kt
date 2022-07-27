@@ -3,7 +3,7 @@ package entity
 import kotlin.test.*
 
 /**
- * test class to test [Player]
+ * test class to test Player
  *
  */
 class PlayerTest {
@@ -25,20 +25,21 @@ class PlayerTest {
             )
         )
     )
-    val player1 = Player("Mo",deck1)
-    val player2 = Player("Luca",deck2)
+     var player1 = Player("Mo",deck1)
+     var player2 = Player("Luca",deck2)
 
 
     /**
-     * funtion to test the parameters of a [Player]
+     * function to test the parameters of a Player
      */
     @Test
     fun testPlayer(){
+
         assert(player1.playerName == "Mo")
         assert(player1.playerHand == deck1)
         assert(player2.playerName == "Luca")
         assert(player2.playerHand == deck2)
 
-    }
 
+    }
 }

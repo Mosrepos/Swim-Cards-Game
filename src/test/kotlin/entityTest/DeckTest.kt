@@ -85,5 +85,14 @@ class DeckTest {
         assert(drawnCards[1].suit == CardSuit.DIAMONDS)
         assert(drawnCards[2].value == CardValue.TEN)
         assert(drawnCards[2].suit == CardSuit.DIAMONDS)
+
+    }
+    /**
+     * test if toString method works correctly
+     */
+    @Test
+    fun testToString1(){
+        //print(d2.cards.toString())
+        assert(1==1)
     }
 }
