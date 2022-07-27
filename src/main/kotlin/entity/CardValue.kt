@@ -53,7 +53,7 @@ enum class CardValue {
     /**
      * @return the value of the card
      */
-    fun valueOf() = when (this) {
+    public fun valueOf() = when (this) {
         SEVEN -> 7
         EIGHT -> 8
         NINE -> 9

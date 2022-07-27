@@ -10,5 +10,16 @@ package entity
  */
 data class Card(val suit :CardSuit, val value : CardValue){
 
+    public fun valueOf() = when (value) {
+        CardValue.SEVEN -> 7
+        CardValue.EIGHT -> 8
+        CardValue.NINE -> 9
+        CardValue.TEN -> 10
+        CardValue.JACK -> 10
+        CardValue.QUEEN -> 10
+        CardValue.KING -> 10
+        CardValue.ACE -> 11
+    }
+
     override fun toString(): String = "$suit$value"
 }

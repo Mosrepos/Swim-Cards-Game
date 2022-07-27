@@ -19,6 +19,12 @@ class CardTest {
     private val queenOfHearts = Card(CardSuit.HEARTS, CardValue.QUEEN)
     private val otherQueenOfHearts = Card(CardSuit.HEARTS, CardValue.QUEEN)
     private val jackOfDiamonds = Card(CardSuit.DIAMONDS, CardValue.JACK)
+    private val sevenOfSpades = Card(CardSuit.SPADES, CardValue.SEVEN)
+    private val eightOfSpades = Card(CardSuit.SPADES, CardValue.EIGHT)
+    private val nineOfSpades = Card(CardSuit.SPADES, CardValue.NINE)
+    private val tenOfSpades = Card(CardSuit.SPADES, CardValue.TEN)
+    private val kingOfSpades = Card(CardSuit.SPADES, CardValue.KING)
+
 
     // unicode characters for the suits, as those should be used by [Card.toString]
     private val heartsChar = '\u2665' // ♥
@@ -70,11 +76,15 @@ class CardTest {
      * test if valueOf returns the right value of a card
      */
     @Test
-    fun testValueOf(){
-        assert(aceOfSpades.value.valueOf()==11)
-        assert(jackOfClubs.value.valueOf()==10)
-        assert(jackOfDiamonds.value.valueOf()==10)
-        assert(queenOfHearts.value.valueOf()==10)
+    fun testValueOf() {
+        assert(sevenOfSpades.value.valueOf() == 7)
+        assert(eightOfSpades.value.valueOf() == 8)
+        assert(nineOfSpades.value.valueOf() == 9)
+        assert(tenOfSpades.value.valueOf() == 10)
+        assert(jackOfClubs.value.valueOf() == 10)
+        assert(queenOfHearts.value.valueOf() == 10)
+        assert(kingOfSpades.value.valueOf() == 10)
+        assert(aceOfSpades.value.valueOf() == 11)
 
     }
 }

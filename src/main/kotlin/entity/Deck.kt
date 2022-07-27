@@ -1,19 +1,17 @@
 package entity
 
 
-import kotlin.collections.ArrayDeque
 import kotlin.random.Random
-
-/**
- * Holds cards in [cards]. A Deck is used to represent a card stack or a players hand in the swim game.
- */
-
 
 /**
  * The actual backing data structure. As there is no dedicated stack implementation
  * in Kotlin, a "double-ended queue" (Deque) is used.
  */
 data class Deck(val cards: ArrayDeque<Card> = ArrayDeque(3)){
+    /**
+     * Holds cards in [cards]. A Deck is used to represent a card stack or a players hand in the swim game.
+     */
+
 
     /**
      * Shuffles the cards in this stack
