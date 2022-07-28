@@ -9,12 +9,12 @@ import entity.Player
  * @param [rootService] is the service that connects to the entity layer
  */
 
-class PlayerService(private val rootService: RootService) {
+class PlayerService(private val rootService: RootService) : AbstractRefreshingService() {
     /**
      * this function increments the passes
      */
-    public fun pass(): Unit {
-        rootService.swimApp.passes++
+    fun pass(): Unit {
+
     }
 
     /**
@@ -22,8 +22,8 @@ class PlayerService(private val rootService: RootService) {
      *
      *@param [currentPlayer] is the current player that wants to call
      */
-    public fun call(currentPlayer: Player): Unit {
-        rootService.swimApp.calledPlayer = currentPlayer
+    fun call(currentPlayer: Player): Unit {
+
     }
 
     /**
@@ -31,17 +31,19 @@ class PlayerService(private val rootService: RootService) {
      * it recieves the @param [wantedCard] from the deck of the player and swaps it
      * with @param [selectedCard] from the table deck
      */
-    public fun swapOneCard(wantedCard: Card, selectedCard: Card): Boolean {
+    fun swapOneCard(wantedCard: Card, selectedCard: Card): Boolean {
 
-        if (rootService.swimApp.currentPlayer.playerHand.cards.contains(wantedCard) && rootService.swimApp.tableDeck.cards.contains(
+        val game = rootService.currentGame
+
+        if (rootService.currentGame.currentPlayer.playerHand.cards.contains(wantedCard) && rootService.currentGame.tableDeck.cards.contains(
                 selectedCard
             )
         ) {
 
-            rootService.swimApp.currentPlayer.playerHand.cards.remove(wantedCard)
-            rootService.swimApp.tableDeck.cards.remove(selectedCard)
-            rootService.swimApp.currentPlayer.playerHand.cards.add(wantedCard)
-            rootService.swimApp.tableDeck.cards.add(selectedCard)
+            rootService.currentGame.currentPlayer.playerHand.cards.remove(wantedCard)
+            rootService.currentGame.tableDeck.cards.remove(selectedCard)
+            rootService.currentGame.currentPlayer.playerHand.cards.add(wantedCard)
+            rootService.currentGame.tableDeck.cards.add(selectedCard)
             return true
         } else {
             return false
@@ -51,27 +53,41 @@ class PlayerService(private val rootService: RootService) {
     /**
      * this function lets the player do the action [swapAllCards]
      */
-    public fun swapAllCards(): Unit {
-        val temp = rootService.swimApp.tableDeck
-        rootService.swimApp.currentPlayer.playerHand = rootService.swimApp.tableDeck
-        rootService.swimApp.currentPlayer.playerHand = temp
+    fun swapAllCards(): Unit {
+        val temp = rootService.currentGame.tableDeck
+        rootService.currentGame.currentPlayer.playerHand = rootService.currentGame.tableDeck
+        rootService.currentGame.currentPlayer.playerHand = temp
     }
 
     /**
      * this function calculates the score of the player
      */
-    public fun calculatePoints(): Double {
-        val scoreCardOne = rootService.swimApp.currentPlayer.playerHand.cards[0].valueOf().toDouble()
-        val scoreCardTwo = rootService.swimApp.currentPlayer.playerHand.cards[1].valueOf().toDouble()
-        val scoreCardThree = rootService.swimApp.currentPlayer.playerHand.cards[2].valueOf().toDouble()
+    fun calculatePoints(player: Player): Double {
+        val playerCards = player.playerHand.cards
 
-        return scoreCardOne + scoreCardTwo + scoreCardThree
+        // check 30.5 points rule
+        val maxCardCountPerValue = playerCards.groupBy { it.value }
+        if (maxCardCountPerValue.keys.size == 1) {
+            return 30.5
+        }
+
+        // group by card color
+        val cardsPerColor = playerCards.groupBy { it.suit }
+        // hearts -> list(Heart-8, Heart-K)
+        // spades -> list(Spades-A)
+        val pointsPerColor = cardsPerColor.map { it.key to it.value.sumOf { jt -> jt.value.valueOf() } }
+
+        // List<Pair<CardValue, Int>>
+        // Pair: first, second
+        // hearts -> 18
+        // spades -> 11
+        return pointsPerColor.maxOf { it.second }.toDouble()
     }
 
     /**
      * this function sets the next player
      */
     private fun nextPlayer(): Unit {
-        // rootService.swimApp.players.indexOf(rootService.swimApp.currentPlayer + 1) = rootService.swimApp.currentPlayer
+        // rootService.currentGame.players.indexOf(rootService.currentGame.currentPlayer + 1) = rootService.currentGame.currentPlayer
     }
 }

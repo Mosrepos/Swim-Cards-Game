@@ -1,13 +1,37 @@
 package service
+
+
 import entity.SwimApp
+import javax.security.auth.Refreshable
 
 /**
- * this class connects the entity layer with the service layer
- * [RootService] knows the [swimApp] , the [PlayerService] and the [swimService]
- *
- * @param [swimApp] is the data class for the game
- * @param [swimService] is the service that creates or starts the game
- * @param [PlayerService] is the service that handles the players actions
+ * Main class of the service layer for the swim game.
+ * It provides access to all other service classes and holds the [currentGame] state for these
+ * services to access.
  *
  */
-class RootService(val swimApp: SwimApp, val swimService: SwimService, val PlayerService: PlayerService)
+class RootService {
+
+    val playerService = PlayerService(this)
+    val swimService = SwimService(this)
+
+
+    var currentGame: SwimApp? = null
+
+    /**
+     * Adds the provided [newRefreshable] to all services connected
+     * to this root service
+     */
+    fun addRefreshable(newRefreshable: Refreshable) {
+        swimService.addRefreshable(newRefreshable)
+        playerService.addRefreshable(newRefreshable)
+    }
+
+    /**
+     * Adds each of the provided [newRefreshables] to all services
+     * connected to this root service
+     */
+    fun addRefreshables(vararg newRefreshables: Refreshable) {
+        newRefreshables.forEach { addRefreshable(it) }
+    }
+}

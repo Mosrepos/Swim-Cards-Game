@@ -7,13 +7,13 @@ import entity.Deck
  *
  */
 
-class SwimService(private val rootService: RootService) {
+class SwimService(private val rootService: RootService) : AbstractRefreshingService() {
 
     /**
      *
      */
     public fun createGame(playersList: List<String>): Unit {
-
+        val game = rootService.currentGame
     }
 
     /**
