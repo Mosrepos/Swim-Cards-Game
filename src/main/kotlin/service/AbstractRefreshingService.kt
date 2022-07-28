@@ -1,6 +1,6 @@
 package service
 
-import javax.security.auth.Refreshable
+import view.Refreshable
 
 /**
  * class that implements the functionality for the abstract refreshing service

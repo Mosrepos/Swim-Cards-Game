@@ -2,7 +2,7 @@ package service
 
 
 import entity.SwimApp
-import javax.security.auth.Refreshable
+import view.Refreshable
 
 /**
  * Main class of the service layer for the swim game.

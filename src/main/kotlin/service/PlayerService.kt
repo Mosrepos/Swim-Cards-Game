@@ -2,6 +2,7 @@ package service
 
 import entity.Card
 import entity.Player
+import kotlin.random.Random
 
 /**
  * this class handles the player actions and knows the [rootService]
@@ -14,6 +15,16 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
      * this function increments the passes
      */
     fun pass(): Unit {
+        val game = rootService.currentGame
+        checkNotNull(game)
+
+        if (game.passes == game.players.size) {
+
+            game.drawPile.cards.addAll(game.tableDeck.cards)
+            game.drawPile.shuffle(Random(42))
+            game.tableDeck.drawThreeCards()
+
+        }
 
     }
 
@@ -34,29 +45,35 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
     fun swapOneCard(wantedCard: Card, selectedCard: Card): Boolean {
 
         val game = rootService.currentGame
+        checkNotNull(game)
 
-        if (rootService.currentGame.currentPlayer.playerHand.cards.contains(wantedCard) && rootService.currentGame.tableDeck.cards.contains(
-                selectedCard
-            )
-        ) {
 
-            rootService.currentGame.currentPlayer.playerHand.cards.remove(wantedCard)
-            rootService.currentGame.tableDeck.cards.remove(selectedCard)
-            rootService.currentGame.currentPlayer.playerHand.cards.add(wantedCard)
-            rootService.currentGame.tableDeck.cards.add(selectedCard)
-            return true
-        } else {
-            return false
+        for (i in 0..2) {
+            if (game.currentPlayer.playerHand.cards[i].toString() == selectedCard.toString() && game.tableDeck.cards[i].toString() == wantedCard.toString()) {
+
+                game.tableDeck.cards.add(selectedCard)
+                game.currentPlayer.playerHand.cards.remove(selectedCard)
+                game.currentPlayer.playerHand.cards.add(wantedCard)
+                game.tableDeck.cards.remove(wantedCard)
+            }
         }
+
+
+        onAllRefreshables { refreshAfterSwap() }
+        return true
+
     }
 
     /**
      * this function lets the player do the action [swapAllCards]
      */
     fun swapAllCards(): Unit {
-        val temp = rootService.currentGame.tableDeck
-        rootService.currentGame.currentPlayer.playerHand = rootService.currentGame.tableDeck
-        rootService.currentGame.currentPlayer.playerHand = temp
+        val game = rootService.currentGame
+        checkNotNull(game)
+
+        val temp = game.tableDeck
+        game.currentPlayer.playerHand = game.tableDeck
+        game.currentPlayer.playerHand = temp
     }
 
     /**
