@@ -24,6 +24,9 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
             game.drawPile.shuffle(Random(42))
             game.tableDeck.drawThreeCards()
 
+        } else {
+            nextPlayer()
+            onAllRefreshables { refreshAfterPlayerChange() }
         }
 
     }
@@ -33,8 +36,16 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
      *
      *@param [currentPlayer] is the current player that wants to call
      */
-    fun call(currentPlayer: Player): Unit {
+    fun call(): Unit {
+        val game = rootService.currentGame
+        checkNotNull(game)
 
+        game.calledPlayer = game.currentPlayer
+
+        //check if other players played the last round
+
+        //end the game
+        rootService.swimService.endGame()
     }
 
     /**
@@ -60,6 +71,8 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
 
 
         onAllRefreshables { refreshAfterSwap() }
+        nextPlayer()
+        onAllRefreshables { refreshAfterPlayerChange() }
         return true
 
     }
@@ -74,6 +87,10 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
         val temp = game.tableDeck
         game.currentPlayer.playerHand = game.tableDeck
         game.currentPlayer.playerHand = temp
+
+        onAllRefreshables { refreshAfterSwap() }
+        nextPlayer()
+        onAllRefreshables { refreshAfterPlayerChange() }
     }
 
     /**
@@ -105,6 +122,9 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
      * this function sets the next player
      */
     private fun nextPlayer(): Unit {
+
+        val game = rootService.currentGame
+
         // rootService.currentGame.players.indexOf(rootService.currentGame.currentPlayer + 1) = rootService.currentGame.currentPlayer
     }
 }
