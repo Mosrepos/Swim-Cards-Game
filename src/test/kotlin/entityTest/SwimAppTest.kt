@@ -25,7 +25,6 @@ class SwimAppTest {
         val p3 = Player("Safi", d3)
         val playersList = listOf(p1, p2, p3)
 
-        var passes: Int = 0
 
         val game1 = SwimApp(playersList, d1, d2)
         game1.currentPlayer = p1

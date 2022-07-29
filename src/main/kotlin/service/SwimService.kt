@@ -47,6 +47,8 @@ class SwimService(private val rootService: RootService) : AbstractRefreshingServ
     fun startGame() {
         val game = rootService.currentGame
 
+        game.tableDeck.cards = ArrayDeque(game.drawPile.drawThreeCards())
+
         for (i in game.players) {
             i.playerHand.cards = ArrayDeque(game.drawPile.drawThreeCards())
         }
