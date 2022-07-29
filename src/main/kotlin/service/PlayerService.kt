@@ -14,7 +14,7 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
     /**
      * this function increments the passes
      */
-    fun pass(): Unit {
+    fun pass() {
         val game = rootService.currentGame
 
         if (game.passes == game.players.size) {
@@ -37,7 +37,7 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
      *
      *@param [currentPlayer] is the current player that wants to call
      */
-    fun call(): Unit {
+    fun call() {
         val game = rootService.currentGame
 
         if (game.calledPlayer == null) {
@@ -75,7 +75,7 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
     /**
      * this function lets the player do the action [swapAllCards]
      */
-    fun swapAllCards(): Unit {
+    fun swapAllCards() {
         val game = rootService.currentGame
 
 
@@ -118,7 +118,7 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
     /**
      * this function sets the next player
      */
-    private fun nextPlayer(): Unit {
+    private fun nextPlayer() {
 
         val game = rootService.currentGame
 

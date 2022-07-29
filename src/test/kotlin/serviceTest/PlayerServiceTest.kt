@@ -2,6 +2,7 @@ package serviceTest
 
 import org.junit.jupiter.api.Test
 import service.RootService
+import kotlin.test.assertEquals
 
 
 /**
@@ -13,9 +14,13 @@ class PlayerServiceTest {
     private val playerService = rootService.playerService
     private val refreshablesTest = RefreshablesTest()
 
+
+    val game = rootService.currentGame
+
     @Test
     fun testPass() {
-
+        playerService.pass()
+        assertEquals(1, game.passes)
     }
 
     @Test
