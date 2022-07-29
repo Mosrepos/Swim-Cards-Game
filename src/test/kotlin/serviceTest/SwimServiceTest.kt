@@ -1,6 +1,7 @@
 package serviceTest
 
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import service.RootService
 import kotlin.test.assertTrue
 
@@ -15,10 +16,13 @@ class SwimServiceTest {
     @Test
     fun testCreateGame() {
         //check if players list has a valid range
+        assertDoesNotThrow { swimService.createGame((listOf("player1", "player2", "player3"))) }
+
 
         //check if the correct amount of players is in the game
-
+        assert(rootService.currentGame.players.size == 3)
         //check if the drawPile has 29 cards
+
         //check if the table deck has 3 cards
         //return the 3 cards to the drawpile
 
