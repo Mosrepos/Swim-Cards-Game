@@ -34,9 +34,7 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
     }
 
     /**
-     * this function lets the [currentPlayer] do the action [call]
-     *
-     *@param [currentPlayer] is the current player that wants to call
+     * this function lets the player do the action [call]
      */
     fun call() {
         val game = rootService.currentGame
@@ -50,7 +48,7 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
 
     /**
      * this function lets the player do the action [swapOneCard]
-     * it recieves the @param [wantedCard] from the deck of the player and swaps it
+     * it receives the @param [wantedCard] from the deck of the player and swaps it
      * with @param [selectedCard] from the table deck
      */
     fun swapOneCard(wantedCard: Card, selectedCard: Card): Boolean {
