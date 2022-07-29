@@ -1,5 +1,8 @@
 package service
 
+import entity.SwimApp
+import kotlin.random.Random
+
 /**
  * this class handles the game actions and knows the [rootService]
  *
@@ -15,23 +18,17 @@ class SwimService(private val rootService: RootService) : AbstractRefreshingServ
      */
     fun createGame(playersList: List<String>): Unit {
 
-        /**
-        val deck1 = Deck()
-        val deck2 = Deck()
-        val player1 = Player()
-        val player2 = Player()
-
-        val players: List<Player> =
-
-
-
-
         val game = SwimApp()
+
+
+        game.drawPile.shuffle(Random(42))
+
+
 
 
         rootService.currentGame = game
         onAllRefreshables { refreshAfterStartGame() }
-         */
+
     }
 
     /**

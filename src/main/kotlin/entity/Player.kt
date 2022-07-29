@@ -8,4 +8,7 @@ package entity
  * @param [playerHand] is the deck of the player containing 3 cards
  */
 
-data class Player (val playerName: String, var playerHand: Deck)
+class Player {
+    val playerName: String = ""
+    var playerHand: Deck = Deck()
+}

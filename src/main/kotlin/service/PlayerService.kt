@@ -38,14 +38,12 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
      */
     fun call(): Unit {
         val game = rootService.currentGame
-        checkNotNull(game)
 
-        game.calledPlayer = game.currentPlayer
-
-        //check if other players played the last round
-
-        //end the game
-        rootService.swimService.endGame()
+        if (game.calledPlayer == null) {
+            game.calledPlayer = game.currentPlayer
+        }
+        game.passes = 0
+        nextPlayer()
     }
 
     /**
@@ -56,25 +54,21 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
     fun swapOneCard(wantedCard: Card, selectedCard: Card): Boolean {
 
         val game = rootService.currentGame
-        checkNotNull(game)
 
+        val tableCardIndex = game.tableDeck.cards.indexOf(wantedCard)
+        val handCardIndex = game.currentPlayer.playerHand.cards.indexOf(selectedCard)
 
-        for (i in 0..2) {
-            if (game.currentPlayer.playerHand.cards[i].toString() == selectedCard.toString() && game.tableDeck.cards[i].toString() == wantedCard.toString()) {
+        if (tableCardIndex != -1 && handCardIndex != -1) {
 
-                game.tableDeck.cards.add(selectedCard)
-                game.currentPlayer.playerHand.cards.remove(selectedCard)
-                game.currentPlayer.playerHand.cards.add(wantedCard)
-                game.tableDeck.cards.remove(wantedCard)
-            }
+            game.tableDeck.cards[tableCardIndex] = selectedCard
+            game.currentPlayer.playerHand.cards[handCardIndex] = wantedCard
+            onAllRefreshables { refreshAfterSwap() }
+            game.passes = 0
+            nextPlayer()
+
+            return true
         }
-
-
-        onAllRefreshables { refreshAfterSwap() }
-        nextPlayer()
-        onAllRefreshables { refreshAfterPlayerChange() }
-        return true
-
+        return false
     }
 
     /**
@@ -82,15 +76,17 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
      */
     fun swapAllCards(): Unit {
         val game = rootService.currentGame
-        checkNotNull(game)
+
 
         val temp = game.tableDeck
         game.currentPlayer.playerHand = game.tableDeck
         game.currentPlayer.playerHand = temp
 
+        game.passes = 0
+
         onAllRefreshables { refreshAfterSwap() }
         nextPlayer()
-        onAllRefreshables { refreshAfterPlayerChange() }
+
     }
 
     /**
@@ -125,6 +121,16 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
 
         val game = rootService.currentGame
 
-        // rootService.currentGame.players.indexOf(rootService.currentGame.currentPlayer + 1) = rootService.currentGame.currentPlayer
+        val currentPlayerIndex = game.players.indexOf(game.currentPlayer)
+        var nextPlayerIndex = currentPlayerIndex + 1
+        if (nextPlayerIndex == game.players.size) {
+            nextPlayerIndex = 0
+        }
+        game.currentPlayer = game.players[nextPlayerIndex]
+        if (game.currentPlayer == game.calledPlayer) {
+            rootService.swimService.endGame()
+        } else {
+            onAllRefreshables { refreshAfterPlayerChange() }
+        }
     }
 }
