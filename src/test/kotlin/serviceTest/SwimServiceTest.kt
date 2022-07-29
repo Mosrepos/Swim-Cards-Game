@@ -1,7 +1,9 @@
 package serviceTest
 
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import service.RootService
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 /**
@@ -12,17 +14,25 @@ class SwimServiceTest {
     private val swimService = rootService.swimService
     private val refreshablesTest = RefreshablesTest()
 
+
     @Test
     fun testCreateGame() {
+        assertDoesNotThrow { swimService.createGame((listOf("player1", "player2", "player3"))) }
+
+        val game = rootService.currentGame
+        //create players for the game
+        val players = listOf<String>("p1", "p2", "p3")
+        swimService.createGame(players)
         //check if players list has a valid range
-        //assertDoesNotThrow { swimService.createGame((listOf("player1", "player2", "player3"))) }
+        assert(game.players.size > 2 && game.players.size < 4)
 
 
         //check if the correct amount of players is in the game
-        //assert(rootService.currentGame.players.size == 3)
+        assert(game.players.size == 3)
         //check if the drawPile has 29 cards
-
+        assert(game.drawPile.cards.size == 29)
         //check if the table deck has 3 cards
+        assert(game.tableDeck.cards.size == 3)
         //return the 3 cards to the drawpile
 
         //check if the drawpile has the right cards
@@ -34,11 +44,22 @@ class SwimServiceTest {
 
     @Test
     fun testStartGame() {
-        rootService.addRefreshable(refreshablesTest)
+
+        val game = rootService.currentGame
+        //create players for the game
+        val players = listOf<String>("p1", "p2", "p3")
+        swimService.createGame(players)
+
         rootService.swimService.startGame()
-        assertTrue { refreshablesTest.refreshAfterStartGameCalled }
+
         //check of all players drawn 3 cards
-        //check if view refreshes
+        for (i in 0..2) {
+            //assertEquals(3,game.players[i].playerHand.cards.size)
+        }
+        assertEquals(3, game.tableDeck.cards.size)
+
+        rootService.addRefreshable(refreshablesTest)
+        assertTrue { refreshablesTest.refreshAfterStartGameCalled }
     }
 
 

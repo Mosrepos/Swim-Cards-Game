@@ -2,6 +2,7 @@ package serviceTest
 
 import org.junit.jupiter.api.Test
 import service.RootService
+import kotlin.test.BeforeTest
 import kotlin.test.assertEquals
 
 
@@ -12,10 +13,20 @@ class PlayerServiceTest {
 
     private val rootService = RootService()
     private val playerService = rootService.playerService
+    private val swimService = rootService.swimService
     private val refreshablesTest = RefreshablesTest()
+    private val game = rootService.currentGame
 
+    /**
+     * create a game for testing
+     */
+    @BeforeTest
+    fun setUpGame() {
+        val players = listOf<String>("player1", "player2")
 
-    val game = rootService.currentGame
+        swimService.createGame(players)
+        swimService.startGame()
+    }
 
     @Test
     fun testPass() {
@@ -36,7 +47,10 @@ class PlayerServiceTest {
 
     @Test
     fun testSwapOneCard() {
-
+        val playerCard = game.currentPlayer.playerHand.cards[0]
+        val tableCard = game.tableDeck.cards[0]
+        //println(playerCard.toString())
+        //println(tableCard.toString())
     }
 
     @Test

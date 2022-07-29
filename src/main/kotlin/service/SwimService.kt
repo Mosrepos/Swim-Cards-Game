@@ -29,7 +29,7 @@ class SwimService(private val rootService: RootService) : AbstractRefreshingServ
         drawPile.cards = ArrayDeque(List(32) { index ->
             Card(
                 CardSuit.values()[index / 8],
-                CardValue.values()[(index % 8) + 5]
+                CardValue.values()[index % 8]
             )
         })
         drawPile.shuffle(Random)
