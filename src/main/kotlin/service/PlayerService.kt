@@ -26,6 +26,7 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
             game.passes = 0
 
         } else {
+            game.passes++
             nextPlayer()
             onAllRefreshables { refreshAfterPlayerChange() }
         }

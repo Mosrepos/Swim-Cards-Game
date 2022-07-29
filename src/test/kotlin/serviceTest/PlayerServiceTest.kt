@@ -19,13 +19,19 @@ class PlayerServiceTest {
 
     @Test
     fun testPass() {
+        assertEquals(0, game.passes)
         playerService.pass()
-        assertEquals(1, game.passes)
+        playerService.pass()
+        assertEquals(2, game.passes)
     }
 
     @Test
     fun testCall() {
-
+        game.passes = 1
+        assert(game.calledPlayer == null)
+        playerService.call()
+        assert(game.calledPlayer != null)
+        assert(game.passes == 0)
     }
 
     @Test
