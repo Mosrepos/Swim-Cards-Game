@@ -11,7 +11,7 @@ class Deck {
     /**
      * Holds cards in [cards]. A Deck is used to represent a card stack or a players hand in the swim game.
      */
-    val cards: ArrayDeque<Card> = ArrayDeque(3)
+    var cards: ArrayDeque<Card> = ArrayDeque(3)
 
     /**
      * Shuffles the cards in this stack

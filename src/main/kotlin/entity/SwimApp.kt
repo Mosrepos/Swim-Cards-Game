@@ -5,11 +5,12 @@ package entity
  * creates a game of "Swim".
  */
 
-class SwimApp {
-    var currentPlayer = Player()
+class SwimApp(
+    var players: List<Player> = listOf(Player("player1"), Player("player2")),
+    val drawPile: Deck = Deck(),
+    val tableDeck: Deck = Deck()
+) {
+    var currentPlayer = players[0]
     var calledPlayer: Player? = null
     var passes: Int = 0
-    val players = listOf<Player>(Player(), Player())
-    val drawPile: Deck = Deck()
-    val tableDeck: Deck = Deck()
 }

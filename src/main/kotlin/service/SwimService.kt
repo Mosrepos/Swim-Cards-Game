@@ -1,6 +1,6 @@
 package service
 
-import entity.SwimApp
+import entity.*
 import kotlin.random.Random
 
 /**
@@ -16,33 +16,48 @@ class SwimService(private val rootService: RootService) : AbstractRefreshingServ
      *
      * it creates a swim game
      */
-    fun createGame(playersList: List<String>): Unit {
+    fun createGame(playersList: List<String>) {
 
-        val game = SwimApp()
+        require(playersList.size in 2..4) { "the list size is not valid" }
+        val players = mutableListOf<Player>()
+        for (i in playersList) {
+            players.add(Player(i))
+        }
 
+        // Creates a deck to draw cards from (drawPile).
+        val drawPile = Deck()
+        drawPile.cards = ArrayDeque(List(32) { index ->
+            Card(
+                CardSuit.values()[index / 8],
+                CardValue.values()[(index % 8) + 5]
+            )
+        })
+        drawPile.shuffle(Random)
 
-        game.drawPile.shuffle(Random(42))
-
-
-
+        val tableDeck = Deck()
+        tableDeck.cards = ArrayDeque(drawPile.drawThreeCards())
+        val game = SwimApp(players = players, drawPile = drawPile, tableDeck = tableDeck)
 
         rootService.currentGame = game
-        onAllRefreshables { refreshAfterStartGame() }
-
     }
 
     /**
      * this function distributes the cards to the players
      */
-    fun startGame(): Unit {
+    fun startGame() {
+        val game = rootService.currentGame
 
+        for (i in game.players) {
+            i.playerHand.cards = ArrayDeque(game.drawPile.drawThreeCards())
+        }
+        onAllRefreshables { refreshAfterStartGame() }
     }
 
     /**
      * this function ends the game
      */
-    fun endGame(): Unit {
-
+    fun endGame() {
+        onAllRefreshables { refreshAfterEndGame() }
     }
 
 }

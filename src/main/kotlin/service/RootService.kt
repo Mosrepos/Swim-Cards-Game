@@ -16,7 +16,7 @@ class RootService {
     val swimService = SwimService(this)
 
 
-    val currentGame: SwimApp = SwimApp()
+    var currentGame: SwimApp = SwimApp()
 
     /**
      * Adds the provided [newRefreshable] to all services connected

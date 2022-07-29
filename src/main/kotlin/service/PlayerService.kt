@@ -16,13 +16,14 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
      */
     fun pass(): Unit {
         val game = rootService.currentGame
-        checkNotNull(game)
 
         if (game.passes == game.players.size) {
 
             game.drawPile.cards.addAll(game.tableDeck.cards)
             game.drawPile.shuffle(Random(42))
             game.tableDeck.drawThreeCards()
+
+            game.passes = 0
 
         } else {
             nextPlayer()
