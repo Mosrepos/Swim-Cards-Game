@@ -43,6 +43,12 @@ class SwimServiceTest {
 
     }
 
+    /**
+     *test if the function startGame works correctly
+     *
+     * the table deck and each player should draw 3 cards from the pile
+     */
+
     @Test
     fun testStartGame() {
 
