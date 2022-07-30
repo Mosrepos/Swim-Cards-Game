@@ -60,6 +60,9 @@ class PlayerServiceTest {
 
     @Test
     fun testCalculatePoints() {
+        for (i in game.players){
+            println( playerService.calculatePoints(i))
+        }
 
     }
 }
