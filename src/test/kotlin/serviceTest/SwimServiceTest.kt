@@ -34,9 +34,9 @@ class SwimServiceTest {
         assert(game.drawPile.cards.size == 29)
         //check if the table deck has 3 cards
         assert(game.tableDeck.cards.size == 3)
-        //return the 3 cards to the drawpile
+        //return the 3 cards to the draw pile
 
-        //check if the drawpile has the right cards
+        //check if the draw pile has the right cards
 
 
         //test overwriting a current game with a new one
