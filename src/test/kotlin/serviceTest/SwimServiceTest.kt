@@ -15,6 +15,9 @@ class SwimServiceTest {
     private val refreshablesTest = RefreshablesTest()
 
 
+    /**
+     * function to test creating a game
+     */
     @Test
     fun testCreateGame() {
         assertDoesNotThrow { swimService.createGame((listOf("player1", "player2", "player3"))) }
