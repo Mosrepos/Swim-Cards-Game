@@ -2,12 +2,13 @@ package serviceTest
 
 import org.junit.jupiter.api.Test
 import service.RootService
+import service.PlayerService
 import kotlin.test.BeforeTest
 import kotlin.test.assertEquals
 
 
 /**
- * Class that provides tests for [PlayerServiceTest]
+ * Class that provides tests for [PlayerService]
  */
 class PlayerServiceTest {
 
