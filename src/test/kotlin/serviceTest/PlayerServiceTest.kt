@@ -16,7 +16,6 @@ class PlayerServiceTest {
     private val rootService = RootService()
     private val playerService = rootService.playerService
     private val swimService = rootService.swimService
-    private val refreshablesTest = RefreshablesTest()
     private var game = rootService.currentGame
 
     /**
@@ -25,7 +24,7 @@ class PlayerServiceTest {
     @BeforeTest
     fun setUpGame() {
 
-        val players = listOf<String>("player1", "player2")
+        val players = listOf("player1", "player2")
 
         swimService.createGame(players)
         swimService.startGame()
