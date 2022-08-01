@@ -5,6 +5,7 @@ import service.RootService
 import service.PlayerService
 import kotlin.test.BeforeTest
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
 
 /**
@@ -40,8 +41,9 @@ class PlayerServiceTest {
     fun testPass() {
         assertEquals(0, game.passes)
         playerService.pass()
+        assertEquals(1, game.passes)
         playerService.pass()
-        assertEquals(2, game.passes)
+        assertEquals(0, game.passes)
     }
 
 
@@ -72,6 +74,8 @@ class PlayerServiceTest {
 
         assert(playerCard.toString() == game.tableDeck.cards[0].toString())
         assert(tableCard.toString() == game.players[0].playerHand.cards[0].toString())
+
+        assertNotEquals(playerCard,game.tableDeck.cards[1])
     }
 
     /**

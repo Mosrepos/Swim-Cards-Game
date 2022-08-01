@@ -15,22 +15,19 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
      * this function increments the passes
      */
     fun pass() {
+
         val game = rootService.currentGame
+        game.passes++
 
         if (game.passes == game.players.size) {
 
-            game.drawPile.cards.addAll(game.tableDeck.cards)
-            game.drawPile.shuffle(Random(42))
-            game.tableDeck.drawThreeCards()
+            game.tableDeck.cards.clear()
+            game.tableDeck.cards = ArrayDeque(game.drawPile.drawThreeCards())
 
             game.passes = 0
-
-        } else {
-            game.passes++
-            nextPlayer()
-            onAllRefreshables { refreshAfterPlayerChange() }
         }
-
+        nextPlayer()
+        onAllRefreshables { refreshAfterPlayerChange() }
     }
 
     /**
