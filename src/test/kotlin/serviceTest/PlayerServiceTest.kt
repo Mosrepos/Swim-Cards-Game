@@ -65,8 +65,13 @@ class PlayerServiceTest {
     fun testSwapOneCard() {
         val playerCard = game.currentPlayer.playerHand.cards[0]
         val tableCard = game.tableDeck.cards[0]
-        //println(playerCard.toString())
-        //println(tableCard.toString())
+        println(playerCard.toString())
+        println(tableCard.toString())
+
+        playerService.swapOneCard(tableCard,playerCard)
+
+        assert(playerCard.toString() == game.tableDeck.cards[0].toString())
+        assert(tableCard.toString() == game.players[0].playerHand.cards[0].toString())
     }
 
     /**
