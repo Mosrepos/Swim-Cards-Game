@@ -16,17 +16,20 @@ class PlayerServiceTest {
     private val playerService = rootService.playerService
     private val swimService = rootService.swimService
     private val refreshablesTest = RefreshablesTest()
-    private val game = rootService.currentGame
+    private var game = rootService.currentGame
 
     /**
      * create a game for testing
      */
     @BeforeTest
     fun setUpGame() {
+
         val players = listOf<String>("player1", "player2")
 
         swimService.createGame(players)
         swimService.startGame()
+
+        game = rootService.currentGame
     }
 
 
@@ -71,19 +74,22 @@ class PlayerServiceTest {
      */
     @Test
     fun testSwapAllCards() {
-        val hand = game.currentPlayer.playerHand.cards
-        val table = game.tableDeck.cards
+        val hand = game.currentPlayer.playerHand
+        val table = game.tableDeck
 
 
         //check if the variables assigned correctly
-        assertEquals(hand,game.currentPlayer.playerHand.cards)
-        assertEquals(table,game.tableDeck.cards)
+        //assertEquals(hand,game.currentPlayer.playerHand.cards)
+        //assertEquals(table,game.tableDeck.cards)
 
         playerService.swapAllCards()
 
         //check if swapped correctly
-        assertEquals(table,game.currentPlayer.playerHand.cards)
-        assertEquals(hand,game.tableDeck.cards)
+        //use previous player not the current player
+
+
+        assertEquals(table,game.players[0].playerHand)
+        assertEquals(hand,game.tableDeck)
 
     }
 

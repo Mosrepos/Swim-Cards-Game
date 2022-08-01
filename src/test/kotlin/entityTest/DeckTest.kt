@@ -64,7 +64,7 @@ class DeckTest {
     @Test
     fun testToString() {
         var deck1 = Deck()
-        val c1 = Card(CardSuit.SPADES, CardValue.ACE)
+        val c1 = Card(CardSuit.DIAMONDS, CardValue.ACE)
         val c2 = Card(CardSuit.DIAMONDS, CardValue.JACK)
         deck1.cards.add(c1)
         deck1.cards.add(c2)

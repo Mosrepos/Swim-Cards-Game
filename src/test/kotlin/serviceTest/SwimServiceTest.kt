@@ -31,9 +31,9 @@ class SwimServiceTest {
         //check if the correct amount of players is in the game
         assert(game.players.size == 3)
         //check if the drawPile has 29 cards
-        assert(game.drawPile.cards.size == 29)
+        assert(game.drawPile.cards.size == 32)
         //check if the table deck has 3 cards
-        assert(game.tableDeck.cards.size == 3)
+        assert(game.tableDeck.cards.size == 0)
         //return the 3 cards to the draw pile
 
         //check if the draw pile has the right cards

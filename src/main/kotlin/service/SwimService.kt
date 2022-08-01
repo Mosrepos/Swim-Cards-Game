@@ -35,7 +35,7 @@ class SwimService(private val rootService: RootService) : AbstractRefreshingServ
         drawPile.shuffle(Random)
 
         val tableDeck = Deck()
-        tableDeck.cards = ArrayDeque(drawPile.drawThreeCards())
+
         val game = SwimApp(players = players, drawPile = drawPile, tableDeck = tableDeck)
 
         rootService.currentGame = game

@@ -79,7 +79,7 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
 
 
         val temp = game.tableDeck
-        game.currentPlayer.playerHand = game.tableDeck
+        game.tableDeck = game.currentPlayer.playerHand
         game.currentPlayer.playerHand = temp
 
         game.passes = 0
