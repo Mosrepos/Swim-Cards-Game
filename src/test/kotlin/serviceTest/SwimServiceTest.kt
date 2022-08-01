@@ -22,10 +22,10 @@ class SwimServiceTest {
 
         val game = rootService.currentGame
         //create players for the game
-        val players = listOf<String>("p1", "p2", "p3")
+        val players = listOf("p1", "p2", "p3")
         swimService.createGame(players)
         //check if players list has a valid range
-        assert(game.players.size > 2 && game.players.size < 4)
+        assert(game.players.size in 3..3)
 
 
         //check if the correct amount of players is in the game
@@ -54,16 +54,16 @@ class SwimServiceTest {
 
         val game = rootService.currentGame
         //create players for the game
-        val players = listOf<String>("p1", "p2", "p3")
+        val players = listOf("p1", "p2", "p3")
         swimService.createGame(players)
 
         swimService.startGame()
 
         //check of all players drawn 3 cards
-        for (i in 0..2) {
+        //for (i in 0..2) {
             //assertEquals(3,game.players[i].playerHand.cards.size)
-        }
-        //assertEquals(3, game.tableDeck.cards.size)
+        //}
+        assert(3 == game.tableDeck.cards.size)
 
         rootService.addRefreshable(refreshablesTest)
         //assertTrue { refreshablesTest.refreshAfterStartGameCalled }

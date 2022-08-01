@@ -20,7 +20,7 @@ class DeckTest {
      */
     @Test
     fun testShuffle() {
-        var deck2 = Deck()
+        val deck2 = Deck()
         val c3 = Card(CardSuit.DIAMONDS, CardValue.TEN)
         val c4 = Card(CardSuit.DIAMONDS, CardValue.KING)
         val c5 = Card(CardSuit.DIAMONDS, CardValue.QUEEN)
@@ -49,7 +49,7 @@ class DeckTest {
     fun testDrawThreeCards() {
 
 
-        var deck1 = Deck()
+        val deck1 = Deck()
         val c1 = Card(CardSuit.SPADES, CardValue.ACE)
         val c2 = Card(CardSuit.DIAMONDS, CardValue.JACK)
         deck1.cards.add(c1)
@@ -63,7 +63,7 @@ class DeckTest {
      */
     @Test
     fun testToString() {
-        var deck1 = Deck()
+        val deck1 = Deck()
         val c1 = Card(CardSuit.DIAMONDS, CardValue.ACE)
         val c2 = Card(CardSuit.DIAMONDS, CardValue.JACK)
         deck1.cards.add(c1)

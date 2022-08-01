@@ -2,7 +2,7 @@ package service
 
 import entity.Card
 import entity.Player
-import kotlin.random.Random
+
 
 /**
  * this class handles the player actions and knows the [rootService]
@@ -87,7 +87,9 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
     }
 
     /**
-     * this function calculates the score of the player
+     * this function calculates the score of the received [player]
+     *
+     * @param [player] is the player that the points are calculated for
      */
     fun calculatePoints(player: Player): Double {
         val playerCards = player.playerHand.cards

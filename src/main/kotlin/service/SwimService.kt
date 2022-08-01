@@ -12,9 +12,9 @@ import kotlin.random.Random
 class SwimService(private val rootService: RootService) : AbstractRefreshingService() {
 
     /**
-     * this function receives the @param [playersList] containing the names of the players and creates the player objects
+     * this function receives the [playersList] and creates a new swim game
      *
-     * it creates a swim game
+     * @param [playersList] contains the names of the players and creates the player objects
      */
     fun createGame(playersList: List<String>) {
 
