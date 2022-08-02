@@ -62,6 +62,12 @@ class StartGameMenu(private val rootService: RootService) : Refreshable, MenuSce
         text = "Start"
     ).apply {
         visual = ColorVisual(2, 192, 44)
+        onMouseClicked = {
+            rootService.swimService.createGame(
+                listOf(p1Input.text.trim(), p2Input.text.trim(),p3Input.text.trim(),p4Input.text.trim())
+            )
+            rootService.swimService.startGame()
+        }
     }
 
     val rulesButton = Button(
@@ -74,15 +80,6 @@ class StartGameMenu(private val rootService: RootService) : Refreshable, MenuSce
 
     init {
         opacity = 1.0
-        addComponents(
-            headlineLabel,
-            quitButton,
-            startButton,
-            rulesButton,
-            p1Input,
-            p2Input,
-            p3Input,
-            p4Input
-        )
+        addComponents(headlineLabel,quitButton, startButton, rulesButton, p1Input,p2Input, p3Input, p4Input)
     }
 }
