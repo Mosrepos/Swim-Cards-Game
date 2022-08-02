@@ -16,8 +16,7 @@ class StartGameMenu(private val rootService: RootService) : Refreshable, MenuSce
         font = Font(size = 40)
     )
     private val p1Input: TextField = TextField(
-        width = 200, height = 35,
-        posX = 100, posY = 125,
+        width = 200, height = 35, posX = 100, posY = 125,
         text = "Player 1"
     ).apply {
         onKeyTyped = {
@@ -26,8 +25,7 @@ class StartGameMenu(private val rootService: RootService) : Refreshable, MenuSce
     }
 
     private val p2Input: TextField = TextField(
-        width = 200, height = 35,
-        posX = 100, posY = 175,
+        width = 200, height = 35, posX = 100, posY = 175,
         text = "Player 2"
     ).apply {
         onKeyTyped = {
@@ -36,29 +34,25 @@ class StartGameMenu(private val rootService: RootService) : Refreshable, MenuSce
     }
 
     private val p3Input: TextField = TextField(
-        width = 200, height = 35,
-        posX = 100, posY = 225,
+        width = 200, height = 35, posX = 100, posY = 225,
         text = ""
     )
 
     private val p4Input: TextField = TextField(
-        width = 200, height = 35,
-        posX = 100, posY = 275,
+        width = 200, height = 35, posX = 100, posY = 275,
         text = ""
     )
 
 
     val quitButton = Button(
-        width = 140, height = 35,
-        posX = 50, posY = 450,
+        width = 140, height = 35, posX = 50, posY = 450,
         text = "Quit"
     ).apply {
         visual = ColorVisual(255, 91, 91)
     }
 
     val startButton = Button(
-        width = 140, height = 35,
-        posX = 200, posY = 450,
+        width = 140, height = 35, posX = 200, posY = 450,
         text = "Start"
     ).apply {
         visual = ColorVisual(2, 192, 44)
@@ -71,8 +65,7 @@ class StartGameMenu(private val rootService: RootService) : Refreshable, MenuSce
     }
 
     val rulesButton = Button(
-        width = 140, height = 35,
-        posX = 120, posY = 400,
+        width = 140, height = 35, posX = 120, posY = 400,
         text = "Rules"
     ).apply {
         visual = ColorVisual(234, 216, 56)
