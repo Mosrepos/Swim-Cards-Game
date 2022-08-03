@@ -17,7 +17,7 @@ class SwimApplication : Refreshable,BoardGameApplication("Swim Game"){
     // is clicked in the gameFinishedMenuScene
 
     private val resultsMenu = EndGameMenu(rootService).apply {
-        startButton.onMouseClicked = {
+        startNewGameButton.onMouseClicked = {
             this@SwimApplication.showMenuScene(startGameMenu)
         }
         quitButton.onMouseClicked = {
@@ -32,24 +32,25 @@ class SwimApplication : Refreshable,BoardGameApplication("Swim Game"){
     //this scene shows the rules
     private val rulesScene = StartGameMenu(rootService).apply {
         rulesButton.onMouseClicked = {
-            RulesScene()
+            showMenuScene(RulesScene())
+        }
+    }
+    private val nextPlayerScene = NextPlayerScene(rootService).apply {
+        readyButton.onMouseClicked = {
+            hideMenuScene()
         }
     }
 
-    init {
 
-        // all scenes and the application itself need to
-        // react to changes done in the service layer
+    init {
         rootService.addRefreshables(
             this,
             gameScene,
             resultsMenu,
-            startGameMenu
+            startGameMenu,
+            nextPlayerScene,
+            rulesScene
         )
-
-        // This is just done so that the blurred background when showing
-        // the new game menu has content and looks nicer
-        rootService.swimService.createGame(listOf("Alice","Bob"))
 
         this.showMenuScene(rulesScene)
         this.showGameScene(gameScene)
@@ -61,8 +62,12 @@ class SwimApplication : Refreshable,BoardGameApplication("Swim Game"){
         this.hideMenuScene()
     }
 
+    override fun refreshAfterPlayerChange() {
+        this.showMenuScene(nextPlayerScene)
+    }
+
     override fun refreshAfterEndGame() {
-        this.showMenuScene(resultsMenu,0)
+        this.showMenuScene(resultsMenu)
     }
 
 }

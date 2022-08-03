@@ -1,8 +1,6 @@
 package view
 
 import entity.Card
-import entity.CardSuit
-import entity.CardValue
 import entity.Deck
 import service.CardImageLoader
 import service.RootService
@@ -19,98 +17,162 @@ import tools.aqua.bgw.visual.ImageVisual
 
 class SwimScene(private val rootService: RootService) : Refreshable, BoardGameScene(1920, 1080) {
 
+    private val hand1 = LinearLayout<CardView>(
+        posX = 668, posY = 150,width = 500,height = 200, spacing = 5
+    )
+    private val name1 = Label(
+        posX = 668,
+        posY = 150,
+        text = ""
+    )
+    private val hand2 = LinearLayout<CardView>(
+        posX = 668, posY = 150,width = 500,height = 200, spacing = 5
+    )
+    private val name2 = Label(
+        posX = 500,
+        posY = 150,
+        text = ""
+    )
+    private val hand3 = LinearLayout<CardView>(
+        posX = 668, posY = 150,width = 500,height = 200, spacing = 5
+    )
+    private val name3 = Label(
+        posX = 300,
+        posY = 150,
+        text = ""
+    )
 
-    //private var playerCard = game.currentPlayer.playerHand.cards[0]
-    //private var tableCard = game.tableDeck.cards[0]
-
-    //private val Hand1 =
-
-    /**
-    private fun displayOtherPlayers() = when(game.players.size) {
-    2 -> {
-
-    }
-    3 -> {
-
-    }
-    4 -> {
-
-    }
-    }
-     */
     private val tableCards = LinearLayout<CardView>(
-        posX = 668, posY = 350,width = 500,height = 200, spacing = 5
+        posX = 668, posY = 450,width = 500,height = 200, spacing = 5
     )
     private val currentPlayerCards = LinearLayout<CardView>(
-        posX = 668, posY = 800,width = 500,height = 200, spacing = 5
+        posX = 668, posY = 850,width = 500,height = 200, spacing = 5
     )
 
     private val image = CardImageLoader()
     private val pile = CardView(
-        front = ImageVisual(image.backImage),posX = 5, posY = 600
+        front = ImageVisual(image.backImage),posX = 10, posY = 850
     )
 
     private val swapAll = Button(
-        width = 300, height = 50, posX = 1600, posY = 800,
-        text = "Swap All Cards"
+        width = 300, height = 50, posX = 1500, posY = 800,
+        text = "Swap All Cards",
+        font = Font(size = 24)
     ).apply {
-        visual = ColorVisual(0, 255, 0)
+        visual = ColorVisual(105, 70, 128)
         onMouseClicked = {
             rootService.playerService.swapAllCards()
         }
     }
+    private var selected :CardView? = null
+    private var wanted :CardView? = null
+
+
+
     private val swapOne = Button(
-        width = 300, height = 50, posX = 1600, posY = 855,
-        text = "Swap One Card"
+        width = 300, height = 50, posX = 1500, posY = 855,
+        text = "Swap One Card",
+        font = Font(size = 24)
     ).apply {
-        visual = ColorVisual(255, 91, 91)
+        visual = ColorVisual(214, 195, 80)
         onMouseClicked = {
-            //player.swapOneCard(playerCard,tableCard)
+            if(wanted != null && selected != null){
+                rootService.playerService.swapOneCard(cardMap.backward(wanted!!),cardMap.backward(selected!!))
+            }
+            else{
+                println("no selected cards")
+            }
         }
     }
     private val call = Button(
-        width = 300, height = 50, posX = 1600, posY = 910,
-        text = "Call"
+        width = 300, height = 50, posX = 1500, posY = 910,
+        text = "Call",
+        font = Font(size = 24)
     ).apply {
-        visual = ColorVisual(255, 91, 91)
+        visual = ColorVisual(200, 91, 60)
         onMouseClicked = {
             rootService.playerService.call()
         }
     }
     private val pass = Button(
-        width = 300, height = 50, posX = 1600, posY = 965,
-        text = "Pass"
+        width = 300, height = 50, posX = 1500, posY = 965,
+        text = "Pass",
+        font = Font(size = 24)
     ).apply {
-        visual = ColorVisual(255, 91, 91)
+        visual = ColorVisual(128, 128, 128)
         onMouseClicked = {
             rootService.playerService.pass()
         }
     }
     private val yourScore = Label(
-        width = 300, height = 50, posX = 800, posY = 700,
-        //text = "your Score:${(rootService.playerService.calculatePoints(rootService.currentGame.currentPlayer)).toString()}",
-        font = Font(size = 22)
+        width = 300, height = 50, posX = 750, posY = 750,
+        text = "",
+        font = Font(size = 26)
     )
+    private val pileLabel = Label(
+        width = 50, height = 20, posX = 20, posY = 820,
+        text = "",
+        font = Font(size = 26)
+    )
+    private fun initScore(){
+        yourScore.text = "your Score:${rootService.playerService.calculatePoints(rootService.currentGame.currentPlayer)}"
+    }
+    private fun updatePileCount(){
+        pileLabel.text = "${rootService.currentGame.drawPile.cards.size}"
+    }
+    /**
+    private fun displayOtherPlayers() = when(rootService.currentGame.players.size) {
+        2 -> {
+            hand1.isVisible = true
+        }
+        3 -> {
+
+        }
+        4 -> {
+
+        }
+    }
+    */
 
     private val cardMap: BidirectionalMap<Card, CardView> = BidirectionalMap()
 
     init {
         background = ColorVisual(108, 168, 59)
-        addComponents(swapAll, swapOne, call, pass, yourScore, tableCards, currentPlayerCards,pile)
+        addComponents(swapAll, swapOne, call, pass, yourScore, tableCards, currentPlayerCards,pile,pileLabel,name1,name2,name3)
     }
 
     override fun refreshAfterStartGame() {
         cardMap.clear()
         val cardImageLoader = CardImageLoader()
         initializeDeckView(rootService.currentGame.tableDeck,tableCards,cardImageLoader)
+        addCardListeners(tableCards)
+
         initializeDeckView(rootService.currentGame.currentPlayer.playerHand,currentPlayerCards,cardImageLoader)
+        addCardListeners(currentPlayerCards)
+
+
+        initScore()
+        updatePileCount()
+        name1.text = rootService.currentGame.players[0].name
+        name2.text = rootService.currentGame.players[1].name
+
     }
 
     override fun refreshAfterPlayerChange() {
         cardMap.clear()
         val cardImageLoader = CardImageLoader()
         initializeDeckView(rootService.currentGame.tableDeck,tableCards,cardImageLoader)
+        addCardListeners(tableCards)
+
         initializeDeckView(rootService.currentGame.currentPlayer.playerHand,currentPlayerCards,cardImageLoader)
+        addCardListeners(currentPlayerCards)
+
+        wanted = null
+        selected = null
+
+        initScore()
+        updatePileCount()
+
     }
 
     /**
@@ -121,37 +183,49 @@ class SwimScene(private val rootService: RootService) : Refreshable, BoardGameSc
     private fun initializeDeckView(
         deck: Deck,
         gameComponentContainer: GameComponentContainer<CardView>,
-        cardImageLoader: CardImageLoader
+        cardImageLoader: CardImageLoader,show :Boolean = true
     ) {
         gameComponentContainer.clear()
         deck.cards.reversed().forEach { card ->
             val cardView = CardView(
-                height = 200,
-                width = 130,
+                height = 220,
+                width = 150,
                 front = ImageVisual(cardImageLoader.frontImageFor(card.suit, card.value)),
                 back = ImageVisual(cardImageLoader.backImage)
             )
             gameComponentContainer.add(cardView)
             cardMap.add(card to cardView)
-            cardView.showFront()
+            if(show){
+                cardView.showFront()
+            }
         }
     }
 
-    // 2 cards for swapOneCard
-    private var card1: Card? = null
-    private var card2: Card? = null
+
 
     private fun addCardListeners(linearLayout: LinearLayout<CardView>) {
-        linearLayout.forEach {
+        linearLayout.forEach{ it ->
             it.apply {
                 onMouseClicked = {
-                    if (card1 == null) {
-                        card1 = cardMap.backward(this)
-                        posY = -20.0
-                    } else {
-                        if (card2 == null) {
-                            card2 = cardMap.backward(this)
+                    if(tableCards.contains(this)){
+                        if (wanted == this){
+                            posY = 0.0
+                            wanted = null
+                        }
+                        else{
+                            tableCards.forEach{jt -> jt.apply { posY = 0.0 }}
                             posY = -20.0
+                            wanted = this
+                        }
+                    }
+                    if (currentPlayerCards.contains(this)){
+                        if (selected == this){
+                            posY = 0.0
+                            selected = null
+                        }else{
+                            currentPlayerCards.forEach{jt -> jt.apply { posY = 0.0 }}
+                            posY = -20.0
+                            selected = this
                         }
                     }
                 }

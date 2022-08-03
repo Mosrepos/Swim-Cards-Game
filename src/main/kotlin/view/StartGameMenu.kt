@@ -15,7 +15,7 @@ class StartGameMenu(private val rootService: RootService) : Refreshable, MenuSce
         text = "New Game",
         font = Font(size = 40)
     )
-    private val p1Input: TextField = TextField(
+     private val p1Input: TextField = TextField(
         width = 200, height = 35, posX = 100, posY = 125,
         text = "Player 1"
     ).apply {
@@ -24,7 +24,7 @@ class StartGameMenu(private val rootService: RootService) : Refreshable, MenuSce
         }
     }
 
-    private val p2Input: TextField = TextField(
+     private val p2Input: TextField = TextField(
         width = 200, height = 35, posX = 100, posY = 175,
         text = "Player 2"
     ).apply {
@@ -58,7 +58,7 @@ class StartGameMenu(private val rootService: RootService) : Refreshable, MenuSce
         visual = ColorVisual(2, 192, 44)
         onMouseClicked = {
             rootService.swimService.createGame(
-                listOf(p1Input.text.trim(), p2Input.text.trim(),p3Input.text.trim(),p4Input.text.trim())
+                listOf(p1Input.text.trim(), p2Input.text.trim(),p3Input.text.trim(),p4Input.text.trim()).filter { it != "" }
             )
             rootService.swimService.startGame()
         }

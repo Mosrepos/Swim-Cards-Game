@@ -26,5 +26,9 @@ class RulesScene : MenuScene(400,500){
     ).apply {
         visual = ColorVisual(66,164,255)
     }
+    init {
+        opacity = 1.0
+        addComponents(headlineLabel,rulesText,backButton)
+    }
 
 }
