@@ -27,7 +27,6 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
             game.passes = 0
         }
         nextPlayer()
-        onAllRefreshables { refreshAfterPlayerChange() }
     }
 
     /**
@@ -38,9 +37,9 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
 
         if (game.calledPlayer == null) {
             game.calledPlayer = game.currentPlayer
+            game.passes = 0
+            nextPlayer()
         }
-        game.passes = 0
-        nextPlayer()
     }
 
     /**
@@ -81,9 +80,7 @@ class PlayerService(private val rootService: RootService) : AbstractRefreshingSe
 
         game.passes = 0
 
-        onAllRefreshables { refreshAfterSwap() }
         nextPlayer()
-
     }
 
     /**
