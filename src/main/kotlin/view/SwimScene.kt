@@ -15,18 +15,32 @@ import tools.aqua.bgw.util.Font
 import tools.aqua.bgw.visual.ColorVisual
 import tools.aqua.bgw.visual.ImageVisual
 
+/**
+ * [SwimScene] is the main scene of the game
+ * it receives the [rootService] and extends [Refreshable] and [BoardGameScene]
+ *
+ * @param [rootService] is the service that connects to the entity layer
+ */
 class SwimScene(private val rootService: RootService) : Refreshable, BoardGameScene(1920, 1080) {
 
+    // 3 dummy hands
     private val hand1 = LinearLayout<CardView>(width = 500, height = 200, spacing = -30)
     private val hand2 = LinearLayout<CardView>(width = 500, height = 200, spacing = -30)
-    private val hand3 = LinearLayout<CardView>( width = 500, height = 200, spacing = -30)
+    private val hand3 = LinearLayout<CardView>(width = 500, height = 200, spacing = -30)
 
+    /**
+     * [yourScore] shows score of the current player
+     */
     private val yourScore = Label(width = 300, height = 50, posX = 750, posY = 750, text = "", font = Font(size = 26))
+
+    /**
+     * [pileLabel] shows the amount of cards in the draw pile
+     */
     private val pileLabel = Label(width = 50, height = 20, posX = 20, posY = 820, text = "", font = Font(size = 26))
 
     private val tableCards = LinearLayout<CardView>(posX = 668, posY = 450, width = 500, height = 200, spacing = 5)
     private val currentPlayerCards = LinearLayout<CardView>(posX = 668, posY = 800, width = 500, height = 200, spacing = 5)
-    private val currentPlayerName = Label(posX = 800, posY = 1050, text = "", font = Font(28))
+
     private val image = CardImageLoader()
     private val pile = CardView(front = ImageVisual(image.backImage), posX = 10, posY = 850)
 
@@ -74,7 +88,9 @@ class SwimScene(private val rootService: RootService) : Refreshable, BoardGameSc
         pileLabel.text = "${rootService.currentGame.drawPile.cards.size}"
     }
 
-
+    /**
+     * [displayOtherPlayers] arranges the game objects depending on the amount of players
+     */
     private fun displayOtherPlayers() = when(rootService.currentGame.players.size) {
     2 -> {
         hand1.isVisible = true
