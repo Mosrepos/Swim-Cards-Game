@@ -3,6 +3,9 @@ package view
 import service.RootService
 import tools.aqua.bgw.core.BoardGameApplication
 
+/**
+ * [SwimApplication] implements all the scenes of the game
+ */
 class SwimApplication : Refreshable,BoardGameApplication("Swim Game"){
     // Central service from which all others are created/accessed
     // also holds the currently active game
@@ -14,7 +17,7 @@ class SwimApplication : Refreshable,BoardGameApplication("Swim Game"){
     private val gameScene = SwimScene(rootService)
 
     // This menu scene is shown after application start and if the "new game" button
-    // is clicked in the gameFinishedMenuScene
+    // is clicked in the resultsMenu
 
     private val resultsMenu = EndGameMenu(rootService).apply {
         startNewGameButton.onMouseClicked = {
@@ -29,12 +32,7 @@ class SwimApplication : Refreshable,BoardGameApplication("Swim Game"){
             exit()
         }
     }
-    //this scene shows the rules
-    private val rulesScene = StartGameMenu(rootService).apply {
-        rulesButton.onMouseClicked = {
-            showMenuScene(RulesScene())
-        }
-    }
+
     private val nextPlayerScene = NextPlayerScene(rootService).apply {
         readyButton.onMouseClicked = {
             hideMenuScene()
@@ -48,11 +46,9 @@ class SwimApplication : Refreshable,BoardGameApplication("Swim Game"){
             gameScene,
             resultsMenu,
             startGameMenu,
-            nextPlayerScene,
-            rulesScene
+            nextPlayerScene
         )
 
-        this.showMenuScene(rulesScene)
         this.showGameScene(gameScene)
         this.showMenuScene(resultsMenu)
         this.showMenuScene(startGameMenu)

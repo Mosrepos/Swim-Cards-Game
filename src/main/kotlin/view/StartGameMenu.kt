@@ -8,6 +8,11 @@ import tools.aqua.bgw.core.MenuScene
 import tools.aqua.bgw.util.Font
 import tools.aqua.bgw.visual.ColorVisual
 
+/**
+ * [StartGameMenu] receives [rootService] and is the menu shown at the beginning of the game
+ *
+ * @param[rootService] is the service that connects to the entity layer
+ */
 class StartGameMenu(private val rootService: RootService) : Refreshable, MenuScene(400, 500) {
 
     private val headlineLabel = Label(
@@ -64,15 +69,8 @@ class StartGameMenu(private val rootService: RootService) : Refreshable, MenuSce
         }
     }
 
-    val rulesButton = Button(
-        width = 140, height = 35, posX = 120, posY = 400,
-        text = "Rules"
-    ).apply {
-        visual = ColorVisual(234, 216, 56)
-    }
-
     init {
         opacity = 1.0
-        addComponents(headlineLabel,quitButton, startButton, rulesButton, p1Input,p2Input, p3Input, p4Input)
+        addComponents(headlineLabel,quitButton, startButton, p1Input,p2Input, p3Input, p4Input)
     }
 }

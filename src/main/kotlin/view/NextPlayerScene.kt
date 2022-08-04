@@ -7,6 +7,12 @@ import tools.aqua.bgw.core.MenuScene
 import tools.aqua.bgw.util.Font
 import tools.aqua.bgw.visual.ColorVisual
 
+/**
+ * [NextPlayerScene] is the scene that shows up when the player chose an action
+ *
+ * it receives the [rootService]
+ * @param[rootService] is the service that connects to the entity layer
+ */
 class NextPlayerScene(private val rootService: RootService) :Refreshable,MenuScene(600,500){
 
     val readyButton = Button(
