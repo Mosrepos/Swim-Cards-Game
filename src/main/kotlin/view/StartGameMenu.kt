@@ -70,7 +70,7 @@ class StartGameMenu(private val rootService: RootService) : Refreshable, MenuSce
     }
 
     init {
-        opacity = 1.0
+        opacity = 0.4
         addComponents(headlineLabel,quitButton, startButton, p1Input,p2Input, p3Input, p4Input)
     }
 }

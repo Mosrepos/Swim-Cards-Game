@@ -14,6 +14,7 @@ import tools.aqua.bgw.util.BidirectionalMap
 import tools.aqua.bgw.util.Font
 import tools.aqua.bgw.visual.ColorVisual
 import tools.aqua.bgw.visual.ImageVisual
+import java.awt.Color
 
 /**
  * [SwimScene] is the main scene of the game
@@ -31,12 +32,12 @@ class SwimScene(private val rootService: RootService) : Refreshable, BoardGameSc
     /**
      * [yourScore] shows score of the current player
      */
-    private val yourScore = Label(width = 300, height = 50, posX = 750, posY = 750, text = "", font = Font(size = 26))
+    private val yourScore = Label(width = 300, height = 50, posX = 750, posY = 750, text = "", font = Font(size = 26, color = Color.WHITE))
 
     /**
      * [pileLabel] shows the amount of cards in the draw pile
      */
-    private val pileLabel = Label(width = 50, height = 20, posX = 20, posY = 820, text = "", font = Font(size = 26))
+    private val pileLabel = Label(width = 50, height = 20, posX = 20, posY = 820, text = "", font = Font(size = 26, color = Color.WHITE),)
 
     private val tableCards = LinearLayout<CardView>(posX = 668, posY = 450, width = 500, height = 200, spacing = 5)
     private val currentPlayerCards = LinearLayout<CardView>(posX = 668, posY = 800, width = 500, height = 200, spacing = 5)
@@ -47,7 +48,7 @@ class SwimScene(private val rootService: RootService) : Refreshable, BoardGameSc
     //Buttons
     private val swapAll = Button(width = 300, height = 50, posX = 1500, posY = 800, text = "Swap All Cards", font = Font(size = 24)
     ).apply {
-        visual = ColorVisual(105, 70, 128)
+        visual = ColorVisual(color = Color.ORANGE)
         onMouseClicked = {
             rootService.playerService.swapAllCards()
         }
@@ -65,7 +66,7 @@ class SwimScene(private val rootService: RootService) : Refreshable, BoardGameSc
     }
     private val call = Button(width = 300, height = 50, posX = 1500, posY = 910, text = "Call", font = Font(size = 24)
     ).apply {
-        visual = ColorVisual(200, 91, 60)
+        visual = ColorVisual(color = Color.RED)
         onMouseClicked = {
             rootService.playerService.call()
         }
@@ -128,7 +129,7 @@ class SwimScene(private val rootService: RootService) : Refreshable, BoardGameSc
     private val cardMap: BidirectionalMap<Card, CardView> = BidirectionalMap()
 
     init {
-        background = ColorVisual(108, 168, 59)
+        background = ColorVisual(27,51,19)
         addComponents(
             swapAll,
             swapOne,
